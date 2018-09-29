@@ -2,6 +2,8 @@ import base64
 from colorama import init, Fore, Back, Style
 from argparse import ArgumentParser, RawTextHelpFormatter
 import os
+
+
 def main(args):
     init()
 
@@ -53,6 +55,7 @@ def main(args):
         print(success_color + '[+] Quack Success! ;)')
     else:
         print(error_color + '[-] File ' + input_file + ' not exists!')
+
 
 if __name__ == '__main__':
     import sys

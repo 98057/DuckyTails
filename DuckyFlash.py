@@ -3,9 +3,12 @@ from ctypes import *
 import time
 import os
 from distutils.dir_util import copy_tree
-from colorama import init, Fore, Back, Style
+#from shutil import copytree
+import logging
+from colorama import init, Fore
 from argparse import ArgumentParser, RawTextHelpFormatter
-
+import sys
+from distutils import log
 
 def main(args):
     init()
@@ -17,17 +20,27 @@ def main(args):
 
     print(default_color)
 
-    parser = ArgumentParser(prog='DuckyFlash', description='Ducky Flash copy the files in USB Drive to Autorun', formatter_class=RawTextHelpFormatter)
-    parser.add_argument('drive', help='USB drive letter \nie: DuckyFlash E:')
-    parser.add_argument('--format', action='store_true', help='Format the USB \nie: DuckyFlash E: --format')
-    parser.add_argument('-e', '--exe', default='.\dist\DuckyTails.exe', help='Generate the STARTAPP.inf from executable \nie: DuckyFlash E: --exe ".\dist\DuckyTails.exe"')
-    parser.add_argument('-f', '--from', default='.\dist', help='Copy from directory \nie: DuckFlash --from ".\dist"')
+    parser = ArgumentParser(prog='DuckyFlash',
+                            description='Ducky Flash copy the files in USB Drive to Autorun',
+                            formatter_class=RawTextHelpFormatter)
+    parser.add_argument('drive', help='USB drive letter'
+                                      'ie: DuckyFlash E:')
+    parser.add_argument('--format',
+                        action='store_true',
+                        help='Format the USB'
+                             'ie: DuckyFlash E: --format')
+    parser.add_argument('-e', '--exe',
+                        default='.\dist\DuckyTails.exe',
+                        help='Generate the STARTAPP.inf from executable'
+                        'ie: DuckyFlash E: --exe ".\dist\DuckyTails.exe"')
     args = parser.parse_args()
+
     if args.format:
         try:
-            print(warning_color + '[.] Starting formating...')
+            print(warning_color + '[.] Starting formatting...')
+            print(warning_color + '[!] DO NOT CANCEL THIS PROCESS!')
             format_drive(args.drive, 'NTFS', 'USBDrive')
-            print(success_color + '[+] Drive formated!')
+            print(success_color + '[+] Drive formatted!')
         except:
             print(error_color + '[-]  Unexpected error:', sys.exc_info()[0])
             raise
@@ -63,34 +76,50 @@ def main(args):
     print(default_color)
     try:
         print(warning_color + '[.] Copying files to USB drive ' + args.drive)
-        from_directory = args.f
-        if args.t:
-            to_directory = args.t
-        else:
-            to_directory = args.drive
+        log.set_verbosity(log.INFO)
+        log.set_threshold(log.INFO)
 
-        copy_tree(from_directory, to_directory)
-        print(success_color + '[+] Files copied!')
+        from_directory = '.\dist'
+        to_directory = args.drive + '\\'
+        print(success_color)
+        copy_tree(from_directory, to_directory, verbose=1)
+
+        print(success_color + '\n[+] Files copied!')
     except:
         print(error_color + '[-]  Unexpected error:', sys.exc_info()[0])
         raise
-    print(error_color + '[+] Quack success! ;)')
+    print(success_color + '[+] Quack success! ;)')
 
     print(default_color)
 
+
+def _logpath(path, names):
+    logging.info('Working in %s' % path)
+    return []   # nothing will be ignored
+
+
+def play_animation(color, text):
+    global animation
+    global i
+    time.sleep(0.1)
+    i += 1
+    sys.stdout.write(color + "\r[" + animation[i % len(animation)] + '] ' + text)
+    sys.stdout.flush()
+
 def myFmtCallback(command, modifier, arg):
-    print('[.] Formating...')
+    play_animation(Fore.RED, 'Formatting...')
     return 1
 
 
-def format_drive(Drive, Format, Title):
+def format_drive(drive, format, title):
     fm = windll.LoadLibrary('fmifs.dll')
-    FMT_CB_FUNC = WINFUNCTYPE(c_int, c_int, c_int, c_void_p)
-    FMIFS_UNKNOWN = 0
-    fm.FormatEx(c_wchar_p(Drive), FMIFS_UNKNOWN, c_wchar_p(Format),
-                c_wchar_p(Title), True, c_int(0), FMT_CB_FUNC(myFmtCallback))
+    fmt_cb_func = WINFUNCTYPE(c_int, c_int, c_int, c_void_p)
+    fmifs_unknown = 0
+    fm.FormatEx(c_wchar_p(drive), fmifs_unknown, c_wchar_p(format),
+                c_wchar_p(title), True, c_int(0), fmt_cb_func(myFmtCallback))
 
 
 if __name__ == '__main__':
-    import sys
+    animation = "|/-\\"
+    i = 0
     sys.exit(main(sys.argv))
