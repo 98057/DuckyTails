@@ -12,7 +12,7 @@ Obs: The payloads (.bin) from Ducky Script is not supported yet.
 
 ## Flash your USB
 ```
-python DuckyFlash.py
+DuckyFlash G:
 ```
 
 Done! You are ready to go.
