@@ -1,7 +1,7 @@
 # DuckyTails
 ![](https://raw.githubusercontent.com/98057/DuckyTails/master/png/DuckyTails.png)
 
-DuckyTails is a interpreter that runs Ducky Scripts from any pendrive. You don't need a USB Rubber Ducky! git 
+DuckyTails is a interpreter that runs Ducky Scripts from any pendrive. You don't need a USB Rubber Ducky! 
 
 ## Quickstart
 ### Encode your script
@@ -9,8 +9,6 @@ DuckyTails is a interpreter that runs Ducky Scripts from any pendrive. You don't
 ```
 DuckyEncoder duck_code.txt
 ```
-Make sure that your ducky_code.txt is in the folder.
-
 Obs: The payloads (.bin) from Ducky Script is not supported yet.
 
 ### Flash your USB
@@ -19,7 +17,7 @@ Obs: The payloads (.bin) from Ducky Script is not supported yet.
 DuckyFlash G:
 ```
 
-Done! You are ready to go!
+Tha's it! You are ready to go!
 
 ##Tips
 
@@ -39,9 +37,9 @@ Files = ['inject.bin', 'payload2.bin', 'duck_code.txt']
 ##Help
 For more instructions:
 ```
-DuckEncoder -h
+DuckyEncoder -h
 ```
 
 ```
-DuckFlash -h
+DuckyFlash -h
 ```
