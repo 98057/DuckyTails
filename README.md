@@ -21,22 +21,22 @@ DuckyFlash G:
 
 Tha's it! You are ready to go!
 
-##Tips
+## Tips
 
-###Multiple scripts
-You can run binary or non-binary scripts editing config.ini from your pendrive:
+### Multiple scripts
+You can run multiple binary or non-binary scripts editing config.ini from your pendrive:
 
 ```
 [Main]
 Files = ['duck_code.txt']
 ```
-[edited]
+After edit:
 ```
 [Main]
 Files = ['inject.bin', 'payload2.bin', 'duck_code.txt']
 ```
 
-##Help
+## Help
 For more instructions:
 ```
 DuckyEncoder -h
