@@ -1,4 +1,3 @@
-import os
 import configparser
 from ctypes import *
 import time
@@ -18,7 +17,7 @@ def main(args):
 
     print(default_color)
 
-    parser = ArgumentParser(prog='DuckyFlash', description='Ducky USB Flash copy the files in USB Drive to Autorun', formatter_class=RawTextHelpFormatter)
+    parser = ArgumentParser(prog='DuckyFlash', description='Ducky Flash copy the files in USB Drive to Autorun', formatter_class=RawTextHelpFormatter)
     parser.add_argument('drive', help='USB drive letter \nie: DuckyFlash E:')
     parser.add_argument('--format', action='store_true', help='Format the USB \nie: DuckyFlash E: --format')
     parser.add_argument('-e', '--exe', default='.\dist\DuckyTails.exe', help='Generate the STARTAPP.inf from executable \nie: DuckyFlash E: --exe ".\dist\DuckyTails.exe"')
