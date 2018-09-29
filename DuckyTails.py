@@ -4,7 +4,6 @@ import base64
 import mimetypes
 import time
 
-
 def main():
     config = configparser.ConfigParser()
     config.read('config.ini')

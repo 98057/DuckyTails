@@ -1,0 +1,17 @@
+altgraph==0.16.1
+colorama==0.3.9
+future==0.16.0
+idna==2.7
+macholib==1.11
+pefile==2018.8.8
+Pillow==5.2.0
+PyAutoGUI==0.9.38
+PyInstaller==3.4
+PyMsgBox==1.0.6
+pynput==1.4
+pypiwin32==223
+PyScreeze==0.1.18
+PyTweening==1.0.3
+pywin32==224
+pywin32-ctypes==0.2.0
+six==1.11.0
